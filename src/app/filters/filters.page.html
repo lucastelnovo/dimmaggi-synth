@@ -1,0 +1,187 @@
+<ion-header>
+    <ion-toolbar class="header-background-color">
+        <ion-title class="title">
+            Digitally Controlled Filters
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list lines="none">
+
+        <ion-item-divider class="divider-background-color">
+            <ion-label style="font-weight: bold; color: white !important;">
+                Master Filter:&nbsp;
+            </ion-label>
+            <ion-label style="color: #efed1f !important; font-weight: bold;">
+                {{filterMasterCutoff}} Hz
+            </ion-label>
+        </ion-item-divider>
+        <ion-grid>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-range [(ngModel)]="filterMasterCutoff" (ionChange)="changeCutoffFreq(0)" step="1"
+                                   min="20"
+                                   max="20000">
+                            <ion-label slot="start">20 Hz</ion-label>
+                            <ion-label slot="end">20000 Hz</ion-label>
+                        </ion-range>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Type</ion-label>
+                        <ion-select [(ngModel)]="filterMasterType" (ionChange)="changeFilterType(0)" style="min-width: 70%;">
+                            <ion-select-option value="lowpass">Low-pass</ion-select-option>
+                            <ion-select-option value="highpass">High-pass</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Rolloff</ion-label>
+                        <ion-select [(ngModel)]="filterMasterRolloff"
+                                    (ionChange)="changeRolloff(0)" style="min-width: 70%;">
+                            <ion-select-option value="-12">-12 dB/oct</ion-select-option>
+                            <ion-select-option value="-24">-24 dB/oct</ion-select-option>
+                            <ion-select-option value="-48">-48 dB/oct</ion-select-option>
+                            <ion-select-option value="-96">-96 dB/oct</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-item-divider class="divider-background-color">
+            <ion-label style="font-weight: bold; color: white !important;">
+                Filter A:&nbsp;
+            </ion-label>
+            <ion-label style="color: #efed1f !important; font-weight: bold;">
+                {{filter1Cutoff}} Hz
+            </ion-label>
+        </ion-item-divider>
+        <ion-grid>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-range [(ngModel)]="filter1Cutoff" (ionChange)="changeCutoffFreq(1)" step="1" min="20"
+                                   max="20000">
+                            <ion-label slot="start">20 Hz</ion-label>
+                            <ion-label slot="end">20000 Hz</ion-label>
+                        </ion-range>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Destination</ion-label>
+                        <ion-select style="min-width: 70%;" [(ngModel)]="filter1Destination"
+                                    (ionChange)="changeFilterDestination(1)">
+                            <ion-select-option value="none">None</ion-select-option>
+                            <ion-select-option value="osc1">OSC A</ion-select-option>
+                            <ion-select-option value="osc2">OSC B</ion-select-option>
+                            <ion-select-option value="osc3">OSC C</ion-select-option>
+                            <ion-select-option value="noise">Noise</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Type</ion-label>
+                        <ion-select style="min-width: 70%;" [(ngModel)]="filter1Type" (ionChange)="changeFilterType(1)">
+                            <ion-select-option value="lowpass">Low-pass</ion-select-option>
+                            <ion-select-option value="highpass">High-pass</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Rolloff</ion-label>
+                        <ion-select style="min-width: 70%;" [(ngModel)]="filter1Rolloff"
+                                    (ionChange)="changeRolloff(1)">
+                            <ion-select-option value="-12">-12 dB/oct</ion-select-option>
+                            <ion-select-option value="-24">-24 dB/oct</ion-select-option>
+                            <ion-select-option value="-48">-48 dB/oct</ion-select-option>
+                            <ion-select-option value="-96">-96 dB/oct</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+        <ion-item-divider class="divider-background-color">
+            <ion-label style="font-weight: bold; color: white !important;">
+                Filter B:&nbsp;
+            </ion-label>
+            <ion-label style="color: #efed1f !important; font-weight: bold;">
+                {{filter2Cutoff}} Hz
+            </ion-label>
+        </ion-item-divider>
+        <ion-grid>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-range [(ngModel)]="filter2Cutoff" (ionChange)="changeCutoffFreq(2)" step="1"
+                                   min="20"
+                                   max="20000">
+                            <ion-label slot="start">20 Hz</ion-label>
+                            <ion-label slot="end">20000 Hz</ion-label>
+                        </ion-range>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Destination</ion-label>
+                        <ion-select style="min-width: 70%;" [(ngModel)]="filter2Destination"
+                                    (ionChange)="changeFilterDestination(2)">
+                            <ion-select-option value="none">None</ion-select-option>
+                            <ion-select-option value="osc1">OSC A</ion-select-option>
+                            <ion-select-option value="osc2">OSC B</ion-select-option>
+                            <ion-select-option value="osc3">OSC C</ion-select-option>
+                            <ion-select-option value="noise">Noise</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Type</ion-label>
+                        <ion-select style="min-width: 70%;" [(ngModel)]="filter2Type" (ionChange)="changeFilterType(2)">
+                            <ion-select-option value="lowpass">Low-pass</ion-select-option>
+                            <ion-select-option value="highpass">High-pass</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+                <ion-col>
+                    <ion-item>
+                        <ion-label style="font-size: small">Rolloff</ion-label>
+                        <ion-select style="min-width: 70%;" [(ngModel)]="filter2Rolloff"
+                                    (ionChange)="changeRolloff(2)">
+                            <ion-select-option value="-12">-12 dB/oct</ion-select-option>
+                            <ion-select-option value="-24">-24 dB/oct</ion-select-option>
+                            <ion-select-option value="-48">-48 dB/oct</ion-select-option>
+                            <ion-select-option value="-96">-96 dB/oct</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+    </ion-list>
+</ion-content>

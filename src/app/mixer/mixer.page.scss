@@ -1,0 +1,54 @@
+.header-background-color {
+  --background: #efed1f;
+}
+
+.divider-background-color {
+  --background: #292929;
+}
+
+.title {
+  color: black;
+  font-size: medium;
+}
+
+.mixer-label-on {
+
+  color: black !important;
+  font-weight: bold !important;
+}
+
+.mixer-label-off {
+  background-color: #5f5e26;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+ion-toggle {
+  --background: #a2a2a2;
+  --background-checked: #efed1f;
+  --handle-background: #5f5e26;
+  --handle-background-checked: #ffffff;
+}
+
+ion-title {
+  color: #efed1f;
+  font-weight: bold;
+}
+ion-select {
+  color: #efed1f;
+  font-weight: bold;
+  font-size: small;
+}
+
+ion-label {
+  color: #efed1f !important;
+  font-weight: bold;
+}
+
+ion-range {
+  --bar-background: #5f5e26;
+}
+
+ion-icon {
+  color: #a2a2a2 !important;
+}

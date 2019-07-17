@@ -1,0 +1,165 @@
+<ion-header>
+    <ion-toolbar class="header-background-color">
+        <ion-title class="title">
+            Envelopes Generator
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item-divider class="divider-background-color">
+            <ion-label>
+                Envelope A
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label>Destination</ion-label>
+                            <ion-select [(ngModel)]="env1Destination" (ionChange)="changeEnvelopeDestination(1)">
+                                <ion-select-option value="none">None</ion-select-option>
+                                <ion-select-option value="osc1">OSC A</ion-select-option>
+                                <ion-select-option value="osc2">OSC B</ion-select-option>
+                                <ion-select-option value="osc3">OSC C</ion-select-option>
+                                <ion-select-option value="filter1">Filter A</ion-select-option>
+                                <ion-select-option value="filter2">Filter B</ion-select-option>
+                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Attack
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env1Attack" (ionChange)="changeParam(1, 'attack')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Decay
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env1Decay" (ionChange)="changeParam(1, 'decay')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Sustain
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env1Sustain" (ionChange)="changeParam(1, 'sustain')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Release
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env1Release" (ionChange)="changeParam(1, 'release')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-button expand="full">
+                            <span style="color: black; font-weight: bold">Trigger Envelope A</span>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+        <ion-item-divider class="divider-background-color">
+            <ion-label>
+                Envelope B
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label>Destination</ion-label>
+                            <ion-select [(ngModel)]="env2Destination" (ionChange)="changeEnvelopeDestination(2)">
+                                <ion-select-option value="none">None</ion-select-option>
+                                <ion-select-option value="osc1">OSC A</ion-select-option>
+                                <ion-select-option value="osc2">OSC B</ion-select-option>
+                                <ion-select-option value="osc3">OSC C</ion-select-option>
+                                <ion-select-option value="filter1">Filter A</ion-select-option>
+                                <ion-select-option value="filter2">Filter B</ion-select-option>
+                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Attack
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env2Attack" (ionChange)="changeParam(2, 'attack')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Decay
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env2Decay" (ionChange)="changeParam(2, 'decay')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Sustain
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env2Sustain" (ionChange)="changeParam(2, 'sustain')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-label>
+                            Release
+                        </ion-label>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-range [(ngModel)]="env2Release" (ionChange)="changeParam(2, 'release')" min="1" max="1000">
+                        </ion-range>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-button expand="full">
+                            <span style="color: black; font-weight: bold">Trigger Envelope B</span>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "mySynth2",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

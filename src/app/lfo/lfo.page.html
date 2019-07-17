@@ -1,0 +1,261 @@
+<ion-header>
+    <ion-toolbar class="header-background-color">
+        <ion-title class="title">
+            Low Frequency Oscillators
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list lines="none">
+        <ion-item-divider class="divider-background-color">
+            <ion-label style="font-weight: bold; color: white !important;">
+                LFO A:&nbsp;
+            </ion-label>
+            <ion-label style="color: #efed1f !important; font-weight: bold;">
+                {{lfo1FreqLabel}} Hz
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(1, 'sine')">
+                            <img *ngIf="lfo1Waveform == 'sine'" src="assets/icon/sine_128_on.png"/>
+                            <img *ngIf="lfo1Waveform != 'sine'" src="assets/icon/sine_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(1, 'triangle')">
+                            <img *ngIf="lfo1Waveform == 'triangle'" src="assets/icon/triangle_128_on.png"/>
+                            <img *ngIf="lfo1Waveform != 'triangle'" src="assets/icon/triangle_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(1, 'sawtooth')">
+                            <img *ngIf="lfo1Waveform == 'sawtooth'" src="assets/icon/sawtooth_128_on.png"/>
+                            <img *ngIf="lfo1Waveform != 'sawtooth'" src="assets/icon/sawtooth_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(1, 'square')">
+                            <img *ngIf="lfo1Waveform == 'square'" src="assets/icon/square_128_on.png"/>
+                            <img *ngIf="lfo1Waveform != 'square'" src="assets/icon/square_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Destination</ion-label>
+                            <ion-select style="min-width: 60%;" [(ngModel)]="lfo1Destination" (ionChange)="changeLFODestination(1)">
+                                <ion-select-option value="none">None</ion-select-option>
+                                <ion-select-option value="osc1">OSC A</ion-select-option>
+                                <ion-select-option value="osc2">OSC B</ion-select-option>
+                                <ion-select-option value="osc3">OSC C</ion-select-option><!--
+                                <ion-select-option value="filter1">Filter A</ion-select-option>
+                                <ion-select-option value="filter2">Filter B</ion-select-option>
+                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>-->
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-item>
+                            <ion-label style="font-size: small">Rate</ion-label>
+                            <ion-range [(ngModel)]="lfo1Freq" (ionChange)="changeFreq(1)" step="1"
+                                       min="1"
+                                       max="1000">
+                                <ion-label slot="start">0.01 Hz</ion-label>
+                                <ion-label slot="end">10 Hz</ion-label>
+                            </ion-range>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col align-self-center>
+                        <ion-item>
+                            <ion-label style="font-size: small">Depth</ion-label>
+                            <ion-range [(ngModel)]="lfo1Amp" (ionChange)="changeAmplitude(1)" step="1" min="0"
+                                       max="10">
+                                <ion-label slot="start">0</ion-label>
+                                <ion-label slot="end">100%</ion-label>
+                            </ion-range>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+        <ion-item-divider class="divider-background-color">
+            <ion-label style="font-weight: bold; color: white !important;">
+                LFO B:&nbsp;
+            </ion-label>
+            <ion-label style="color: #efed1f !important; font-weight: bold;">
+                {{lfo2FreqLabel}} Hz
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(2, 'sine')">
+                            <img *ngIf="lfo2Waveform == 'sine'" src="assets/icon/sine_128_on.png"/>
+                            <img *ngIf="lfo2Waveform != 'sine'" src="assets/icon/sine_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(2, 'triangle')">
+                            <img *ngIf="lfo2Waveform == 'triangle'" src="assets/icon/triangle_128_on.png"/>
+                            <img *ngIf="lfo2Waveform != 'triangle'" src="assets/icon/triangle_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(2, 'sawtooth')">
+                            <img *ngIf="lfo2Waveform == 'sawtooth'" src="assets/icon/sawtooth_128_on.png"/>
+                            <img *ngIf="lfo2Waveform != 'sawtooth'" src="assets/icon/sawtooth_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(2, 'square')">
+                            <img *ngIf="lfo2Waveform == 'square'" src="assets/icon/square_128_on.png"/>
+                            <img *ngIf="lfo2Waveform != 'square'" src="assets/icon/square_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Destination</ion-label>
+                            <ion-select style="min-width: 60%;" [(ngModel)]="lfo2Destination" (ionChange)="changeLFODestination(2)">
+                                <ion-select-option value="none">None</ion-select-option>
+                                <ion-select-option value="osc1">OSC A</ion-select-option>
+                                <ion-select-option value="osc2">OSC B</ion-select-option>
+                                <ion-select-option value="osc3">OSC C</ion-select-option><!--
+                                <ion-select-option value="filter1">Filter A</ion-select-option>
+                                <ion-select-option value="filter2">Filter B</ion-select-option>
+                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>-->
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Rate</ion-label>
+                            <ion-range [(ngModel)]="lfo2Freq" (ionChange)="changeFreq(2)" step="1"
+                                       min="1"
+                                       max="1000">
+                                <ion-label slot="start">0.01 Hz</ion-label>
+                                <ion-label slot="end">10 Hz</ion-label>
+                            </ion-range>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Depth</ion-label>
+                            <ion-range [(ngModel)]="lfo2Amp" (ionChange)="changeAmplitude(2)" step="1" min="0"
+                                       max="10">
+                                <ion-label slot="start">0</ion-label>
+                                <ion-label slot="end">100%</ion-label>
+                            </ion-range>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+        <ion-item-divider class="divider-background-color">
+            <ion-label style="font-weight: bold; color: white !important;">
+                LFO C:&nbsp;
+            </ion-label>
+            <ion-label style="color: #efed1f !important; font-weight: bold;">
+                {{lfo3FreqLabel}} Hz
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(3, 'sine')">
+                            <img *ngIf="lfo3Waveform == 'sine'" src="assets/icon/sine_128_on.png"/>
+                            <img *ngIf="lfo3Waveform != 'sine'" src="assets/icon/sine_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(3, 'triangle')">
+                            <img *ngIf="lfo3Waveform == 'triangle'" src="assets/icon/triangle_128_on.png"/>
+                            <img *ngIf="lfo3Waveform != 'triangle'" src="assets/icon/triangle_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(3, 'sawtooth')">
+                            <img *ngIf="lfo3Waveform == 'sawtooth'" src="assets/icon/sawtooth_128_on.png"/>
+                            <img *ngIf="lfo3Waveform != 'sawtooth'" src="assets/icon/sawtooth_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-item (click)="changeWaveform(3, 'square')">
+                            <img *ngIf="lfo3Waveform == 'square'" src="assets/icon/square_128_on.png"/>
+                            <img *ngIf="lfo3Waveform != 'square'" src="assets/icon/square_128_off.png"/>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Destination</ion-label>
+                            <ion-select style="min-width: 60%;" [(ngModel)]="lfo3Destination" (ionChange)="changeLFODestination(3)">
+                                <ion-select-option value="none">None</ion-select-option>
+                                <ion-select-option value="osc1">OSC A</ion-select-option>
+                                <ion-select-option value="osc2">OSC B</ion-select-option>
+                                <ion-select-option value="osc3">OSC C</ion-select-option><!--
+                                <ion-select-option value="filter1">Filter A</ion-select-option>
+                                <ion-select-option value="filter2">Filter B</ion-select-option>
+                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>-->
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Rate</ion-label>
+                            <ion-range [(ngModel)]="lfo3Freq" (ionChange)="changeFreq(3)" step="1"
+                                       min="1"
+                                       max="1000">
+                                <ion-label slot="start">0.01 Hz</ion-label>
+                                <ion-label slot="end">10 Hz</ion-label>
+                            </ion-range>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label style="font-size: small">Depth</ion-label>
+                            <ion-range [(ngModel)]="lfo3Amp" (ionChange)="changeAmplitude(3)" step="1" min="0"
+                                       max="10">
+                                <ion-label slot="start">0</ion-label>
+                                <ion-label slot="end">100%</ion-label>
+                            </ion-range>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

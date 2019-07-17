@@ -1,0 +1,35 @@
+.header-background-color{
+  --background: #efed1f;
+}
+
+.divider-background-color{
+  --background: #292929;
+}
+
+.title{
+  color: black;
+  font-size: medium;
+}
+
+ion-title {
+  color: #efed1f;
+  font-weight: bold;
+}
+
+ion-label {
+  color: #a2a2a2 !important;
+}
+
+ion-range {
+  --bar-background: #5f5e26;
+
+}
+
+ion-select {
+  color: #efed1f;
+  font-weight: bold;
+}
+
+ion-list{
+  padding-top: 0px;
+}
