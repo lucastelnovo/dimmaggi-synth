@@ -1,263 +1,383 @@
 <ion-header>
-    <ion-toolbar class="header-background-color">
-        <ion-title class="title">
-            Digitally Controlled Oscillators
-        </ion-title>
-    </ion-toolbar>
+  <ion-toolbar class="header-background-color">
+    <ion-title class="title"> Digitally Controlled Oscillators </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-list lines="none">
-        <ion-item-divider class="divider-background-color">
-            <ion-label style="font-weight: bold; color: white !important;">
-                Oscillator A:&nbsp;
-            </ion-label>
-            <ion-label style="color: #efed1f !important; font-weight: bold;">
-                {{osc1FreqFine}} Hz
-            </ion-label>
-            <!--<ion-toggle (click)="stopOsc(1)" slot="end" color="primary"></ion-toggle>-->
-        </ion-item-divider>
-        <ion-item>
-            <ion-grid>
-                <ion-row justify-content-center>
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(1, 'sine')">
-                            <img *ngIf="osc1Waveform == 'sine'" src="assets/icon/sine_128_on.png"/>
-                            <img *ngIf="osc1Waveform != 'sine'" src="assets/icon/sine_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+  <ion-list lines="none">
+    <ion-item-divider class="divider-background-color">
+      <ion-label style="font-weight: bold; color: white !important">
+        Oscillator A:&nbsp;
+      </ion-label>
+      <ion-button shape="round" strong="true" (click)="changeFreqButton(1)"
+        ><span style="color: black">{{osc1FreqFine}} Hz</span></ion-button
+      >
+      <!-- <ion-input
+        inputmode="numeric"
+        min="20"
+        max="20000"
+        (ionChange)="changeFreqFine(1)"
+        [(ngModel)]="osc1FreqFine"
+        style="color: #efed1f !important; font-weight: bold"
+      >
+      </ion-input>       -->
+    </ion-item-divider>
+    <ion-item>
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col>
+            <ion-item (click)="changeWaveform(1, 'sine')">
+              <img
+                *ngIf="osc1Waveform == 'sine'"
+                src="assets/icon/sine_128_on.png"
+              />
+              <img
+                *ngIf="osc1Waveform != 'sine'"
+                src="assets/icon/sine_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(1, 'triangle')">
-                            <img *ngIf="osc1Waveform == 'triangle'" src="assets/icon/triangle_128_on.png"/>
-                            <img *ngIf="osc1Waveform != 'triangle'" src="assets/icon/triangle_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(1, 'triangle')">
+              <img
+                *ngIf="osc1Waveform == 'triangle'"
+                src="assets/icon/triangle_128_on.png"
+              />
+              <img
+                *ngIf="osc1Waveform != 'triangle'"
+                src="assets/icon/triangle_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(1, 'sawtooth')">
-                            <img *ngIf="osc1Waveform == 'sawtooth'" src="assets/icon/sawtooth_128_on.png"/>
-                            <img *ngIf="osc1Waveform != 'sawtooth'" src="assets/icon/sawtooth_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(1, 'sawtooth')">
+              <img
+                *ngIf="osc1Waveform == 'sawtooth'"
+                src="assets/icon/sawtooth_128_on.png"
+              />
+              <img
+                *ngIf="osc1Waveform != 'sawtooth'"
+                src="assets/icon/sawtooth_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(1, 'square')">
-                            <img *ngIf="osc1Waveform == 'square'" src="assets/icon/square_128_on.png"/>
-                            <img *ngIf="osc1Waveform != 'square'" src="assets/icon/square_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col size="3" align-self-center>
-                        <ion-label style="font-size: small">Coarse</ion-label>
-                    </ion-col>
-                    <ion-col align-self-center>
-                        <ion-range [(ngModel)]="osc1Freq" (ionChange)="changeFreq(1)" step="1"
-                                   min="20"
-                                   max="20000">
-                            <ion-label slot="start">20 Hz</ion-label>
-                            <ion-label slot="end">20000 Hz</ion-label>
-                        </ion-range>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col size="2" align-self-center>
-                        <ion-label style="font-size: small">Fine</ion-label>
-                    </ion-col>
-                    <ion-col>
-                        <ion-range [(ngModel)]="osc1FreqFine" (ionChange)="changeFreqFine(1)" step="1"
-                                   min="{{minFineOsc1Freq}}"
-                                   max="{{maxFineOsc1Freq}}">
-                            <ion-label slot="start">{{minFineOsc1Freq}} Hz</ion-label>
-                            <ion-label slot="end">{{maxFineOsc1Freq}} Hz</ion-label>
-                        </ion-range>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-item>
+          <ion-col>
+            <ion-item (click)="changeWaveform(1, 'square')">
+              <img
+                *ngIf="osc1Waveform == 'square'"
+                src="assets/icon/square_128_on.png"
+              />
+              <img
+                *ngIf="osc1Waveform != 'square'"
+                src="assets/icon/square_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="3" align-self-center>
+            <ion-label style="font-size: small">Coarse</ion-label>
+          </ion-col>
+          <ion-col align-self-center>
+            <ion-range
+              [(ngModel)]="osc1Freq"
+              (ionChange)="changeFreq(1)"
+              step="1"
+              min="20"
+              max="20000"
+            >
+              <ion-label slot="start">20 Hz</ion-label>
+              <ion-label slot="end">20000 Hz</ion-label>
+            </ion-range>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="2" align-self-center>
+            <ion-label style="font-size: small">Fine</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-range
+              [(ngModel)]="osc1FreqFine"
+              (ionChange)="changeFreqFine(1)"
+              step="1"
+              min="{{minFineOsc1Freq}}"
+              max="{{maxFineOsc1Freq}}"
+            >
+              <ion-label slot="start">{{minFineOsc1Freq}} Hz</ion-label>
+              <ion-label slot="end">{{maxFineOsc1Freq}} Hz</ion-label>
+            </ion-range>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
 
+    <ion-item-divider class="divider-background-color">
+      <ion-label style="font-weight: bold; color: white !important">
+        Oscillator B:&nbsp;
+      </ion-label>
+      <ion-button shape="round" strong="true" (click)="changeFreqButton(2)"
+        ><span style="color: black">{{osc2FreqFine}} Hz</span></ion-button
+      >
+      <!-- <ion-label style="color: #efed1f !important; font-weight: bold">
+        {{osc2FreqFine}} Hz
+      </ion-label> -->
+      <!--<ion-toggle slot="end" color="primary" (click)="stopOsc(2)"></ion-toggle>-->
+    </ion-item-divider>
+    <ion-item>
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col>
+            <ion-item (click)="changeWaveform(2, 'sine')">
+              <img
+                *ngIf="osc2Waveform == 'sine'"
+                src="assets/icon/sine_128_on.png"
+              />
+              <img
+                *ngIf="osc2Waveform != 'sine'"
+                src="assets/icon/sine_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-        <ion-item-divider class="divider-background-color">
-            <ion-label style="font-weight: bold; color: white !important;">
-                Oscillator B:&nbsp;
-            </ion-label>
-            <ion-label style="color: #efed1f !important; font-weight: bold;">
-                {{osc2FreqFine}} Hz
-            </ion-label>
-            <!--<ion-toggle slot="end" color="primary" (click)="stopOsc(2)"></ion-toggle>-->
-        </ion-item-divider>
-        <ion-item>
-            <ion-grid>
-                <ion-row justify-content-center>
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(2, 'sine')">
-                            <img *ngIf="osc2Waveform == 'sine'" src="assets/icon/sine_128_on.png"/>
-                            <img *ngIf="osc2Waveform != 'sine'" src="assets/icon/sine_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(2, 'triangle')">
+              <img
+                *ngIf="osc2Waveform == 'triangle'"
+                src="assets/icon/triangle_128_on.png"
+              />
+              <img
+                *ngIf="osc2Waveform != 'triangle'"
+                src="assets/icon/triangle_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(2, 'triangle')">
-                            <img *ngIf="osc2Waveform == 'triangle'" src="assets/icon/triangle_128_on.png"/>
-                            <img *ngIf="osc2Waveform != 'triangle'" src="assets/icon/triangle_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(2, 'sawtooth')">
+              <img
+                *ngIf="osc2Waveform == 'sawtooth'"
+                src="assets/icon/sawtooth_128_on.png"
+              />
+              <img
+                *ngIf="osc2Waveform != 'sawtooth'"
+                src="assets/icon/sawtooth_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(2, 'sawtooth')">
-                            <img *ngIf="osc2Waveform == 'sawtooth'" src="assets/icon/sawtooth_128_on.png"/>
-                            <img *ngIf="osc2Waveform != 'sawtooth'" src="assets/icon/sawtooth_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(2, 'square')">
+              <img
+                *ngIf="osc2Waveform == 'square'"
+                src="assets/icon/square_128_on.png"
+              />
+              <img
+                *ngIf="osc2Waveform != 'square'"
+                src="assets/icon/square_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="3" align-self-center>
+            <ion-label style="font-size: small">Coarse</ion-label>
+          </ion-col>
+          <ion-col align-self-center>
+            <ion-range
+              [(ngModel)]="osc2Freq"
+              (ionChange)="changeFreq(2)"
+              step="1"
+              min="20"
+              max="20000"
+            >
+              <ion-label slot="start">20 Hz</ion-label>
+              <ion-label slot="end">20000 Hz</ion-label>
+            </ion-range>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="2" align-self-center>
+            <ion-label style="font-size: small">Fine</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-range
+              [(ngModel)]="osc2FreqFine"
+              (ionChange)="changeFreqFine(2)"
+              step="1"
+              min="{{minFineOsc2Freq}}"
+              max="{{maxFineOsc2Freq}}"
+            >
+              <ion-label slot="start">{{minFineOsc2Freq}} Hz</ion-label>
+              <ion-label slot="end">{{maxFineOsc2Freq}} Hz</ion-label>
+            </ion-range>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(2, 'square')">
-                            <img *ngIf="osc2Waveform == 'square'" src="assets/icon/square_128_on.png"/>
-                            <img *ngIf="osc2Waveform != 'square'" src="assets/icon/square_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col size="3" align-self-center>
-                        <ion-label style="font-size: small">Coarse</ion-label>
-                    </ion-col>
-                    <ion-col align-self-center>
-                        <ion-range [(ngModel)]="osc2Freq" (ionChange)="changeFreq(2)" step="1"
-                                   min="20"
-                                   max="20000">
-                            <ion-label slot="start">20 Hz</ion-label>
-                            <ion-label slot="end">20000 Hz</ion-label>
-                        </ion-range>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col size="2" align-self-center>
-                        <ion-label style="font-size: small">Fine</ion-label>
-                    </ion-col>
-                    <ion-col>
-                        <ion-range [(ngModel)]="osc2FreqFine" (ionChange)="changeFreqFine(2)" step="1"
-                                   min="{{minFineOsc2Freq}}"
-                                   max="{{maxFineOsc2Freq}}">
-                            <ion-label slot="start">{{minFineOsc2Freq}} Hz</ion-label>
-                            <ion-label slot="end">{{maxFineOsc2Freq}} Hz</ion-label>
-                        </ion-range>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-item>
+    <ion-item-divider class="divider-background-color">
+      <ion-label style="font-weight: bold; color: white !important">
+        Oscillator C:&nbsp;
+      </ion-label>
+      <ion-button shape="round" strong="true" (click)="changeFreqButton(3)"
+        ><span style="color: black">{{osc3FreqFine}} Hz</span></ion-button
+      >
+      <!--<ion-toggle slot="end" color="primary" (click)="stopOsc(3)"></ion-toggle>-->
+    </ion-item-divider>
+    <ion-item>
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col>
+            <ion-item (click)="changeWaveform(3, 'sine')">
+              <img
+                *ngIf="osc3Waveform == 'sine'"
+                src="assets/icon/sine_128_on.png"
+              />
+              <img
+                *ngIf="osc3Waveform != 'sine'"
+                src="assets/icon/sine_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
+          <ion-col>
+            <ion-item (click)="changeWaveform(3, 'triangle')">
+              <img
+                *ngIf="osc3Waveform == 'triangle'"
+                src="assets/icon/triangle_128_on.png"
+              />
+              <img
+                *ngIf="osc3Waveform != 'triangle'"
+                src="assets/icon/triangle_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-        <ion-item-divider class="divider-background-color">
-            <ion-label style="font-weight: bold; color: white !important;">
-                Oscillator C:&nbsp;
-            </ion-label>
-            <ion-label style="color: #efed1f !important; font-weight: bold;">
-                {{osc3FreqFine}} Hz
-            </ion-label>
-            <!--<ion-toggle slot="end" color="primary" (click)="stopOsc(3)"></ion-toggle>-->
-        </ion-item-divider>
-        <ion-item>
-            <ion-grid>
-                <ion-row justify-content-center>
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(3, 'sine')">
-                            <img *ngIf="osc3Waveform == 'sine'" src="assets/icon/sine_128_on.png"/>
-                            <img *ngIf="osc3Waveform != 'sine'" src="assets/icon/sine_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(3, 'sawtooth')">
+              <img
+                *ngIf="osc3Waveform == 'sawtooth'"
+                src="assets/icon/sawtooth_128_on.png"
+              />
+              <img
+                *ngIf="osc3Waveform != 'sawtooth'"
+                src="assets/icon/sawtooth_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(3, 'triangle')">
-                            <img *ngIf="osc3Waveform == 'triangle'" src="assets/icon/triangle_128_on.png"/>
-                            <img *ngIf="osc3Waveform != 'triangle'" src="assets/icon/triangle_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+          <ion-col>
+            <ion-item (click)="changeWaveform(3, 'square')">
+              <img
+                *ngIf="osc3Waveform == 'square'"
+                src="assets/icon/square_128_on.png"
+              />
+              <img
+                *ngIf="osc3Waveform != 'square'"
+                src="assets/icon/square_128_off.png"
+              />
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="3" align-self-center>
+            <ion-label style="font-size: small">Coarse</ion-label>
+          </ion-col>
+          <ion-col align-self-center>
+            <ion-range
+              [(ngModel)]="osc3Freq"
+              (ionChange)="changeFreq(3)"
+              step="1"
+              min="20"
+              max="20000"
+            >
+              <ion-label slot="start">20 Hz</ion-label>
+              <ion-label slot="end">20000 Hz</ion-label>
+            </ion-range>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col size="2" align-self-center>
+            <ion-label style="font-size: small">Fine</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-range
+              [(ngModel)]="osc3FreqFine"
+              (ionChange)="changeFreqFine(3)"
+              step="1"
+              min="{{minFineOsc3Freq}}"
+              max="{{maxFineOsc3Freq}}"
+            >
+              <ion-label slot="start">{{minFineOsc3Freq}} Hz</ion-label>
+              <ion-label slot="end">{{maxFineOsc3Freq}} Hz</ion-label>
+            </ion-range>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(3, 'sawtooth')">
-                            <img *ngIf="osc3Waveform == 'sawtooth'" src="assets/icon/sawtooth_128_on.png"/>
-                            <img *ngIf="osc3Waveform != 'sawtooth'" src="assets/icon/sawtooth_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
+    <ion-item-divider class="divider-background-color">
+      <ion-label style="font-weight: bold; color: white !important">
+        Noise
+      </ion-label>
+      <!--<ion-toggle slot="end" color="primary" (click)="stopOsc(0)"></ion-toggle>-->
+    </ion-item-divider>
+    <ion-item>
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col>
+            <ion-item (click)="changeWaveform(0, 'white')">
+              <ion-label
+                style="color: #efed1f !important; font-weight: bold"
+                *ngIf="noiseType == 'white'"
+                >White
+              </ion-label>
+              <ion-label
+                style="color: #5f5e26 !important"
+                *ngIf="noiseType != 'white'"
+                >White</ion-label
+              >
+            </ion-item>
+          </ion-col>
 
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(3, 'square')">
-                            <img *ngIf="osc3Waveform == 'square'" src="assets/icon/square_128_on.png"/>
-                            <img *ngIf="osc3Waveform != 'square'" src="assets/icon/square_128_off.png"/>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col size="3" align-self-center>
-                        <ion-label style="font-size: small">Coarse</ion-label>
-                    </ion-col>
-                    <ion-col align-self-center>
-                        <ion-range [(ngModel)]="osc3Freq" (ionChange)="changeFreq(3)" step="1"
-                                   min="20"
-                                   max="20000">
-                            <ion-label slot="start">20 Hz</ion-label>
-                            <ion-label slot="end">20000 Hz</ion-label>
-                        </ion-range>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col size="2" align-self-center>
-                        <ion-label style="font-size: small">Fine</ion-label>
-                    </ion-col>
-                    <ion-col>
-                        <ion-range [(ngModel)]="osc3FreqFine" (ionChange)="changeFreqFine(3)" step="1"
-                                   min="{{minFineOsc3Freq}}"
-                                   max="{{maxFineOsc3Freq}}">
-                            <ion-label slot="start">{{minFineOsc3Freq}} Hz</ion-label>
-                            <ion-label slot="end">{{maxFineOsc3Freq}} Hz</ion-label>
-                        </ion-range>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-item>
+          <ion-col>
+            <ion-item (click)="changeWaveform(0, 'pink')">
+              <ion-label
+                style="color: #efed1f !important; font-weight: bold"
+                *ngIf="noiseType == 'pink'"
+                >Pink
+              </ion-label>
+              <ion-label
+                style="color: #5f5e26 !important"
+                *ngIf="noiseType != 'pink'"
+                >Pink</ion-label
+              >
+            </ion-item>
+          </ion-col>
 
+          <ion-col>
+            <ion-item (click)="changeWaveform(0, 'brown')">
+              <ion-label
+                style="color: #efed1f !important; font-weight: bold"
+                *ngIf="noiseType == 'brown'"
+                >Brown
+              </ion-label>
+              <ion-label
+                style="color: #5f5e26 !important"
+                *ngIf="noiseType != 'brown'"
+                >Brown</ion-label
+              >
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
 
-        <ion-item-divider class="divider-background-color">
-            <ion-label style="font-weight: bold; color: white !important;">
-                Noise
-            </ion-label>
-            <!--<ion-toggle slot="end" color="primary" (click)="stopOsc(0)"></ion-toggle>-->
-        </ion-item-divider>
-        <ion-item>
-            <ion-grid>
-                <ion-row justify-content-center>
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(0, 'white')">
-                            <ion-label style="color: #efed1f !important; font-weight: bold;"
-                                       *ngIf="noiseType == 'white'">White
-                            </ion-label>
-                            <ion-label style="color: #5f5e26 !important;" *ngIf="noiseType != 'white'">White</ion-label>
-                        </ion-item>
-                    </ion-col>
-
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(0, 'pink')">
-                            <ion-label style="color: #efed1f !important; font-weight: bold;"
-                                       *ngIf="noiseType == 'pink'">Pink
-                            </ion-label>
-                            <ion-label style="color: #5f5e26 !important;" *ngIf="noiseType != 'pink'">Pink</ion-label>
-                        </ion-item>
-                    </ion-col>
-
-                    <ion-col>
-                        <ion-item (click)="changeWaveform(0, 'brown')">
-                            <ion-label style="color: #efed1f !important; font-weight: bold;"
-                                       *ngIf="noiseType == 'brown'">Brown
-                            </ion-label>
-                            <ion-label style="color: #5f5e26 !important;" *ngIf="noiseType != 'brown'">Brown</ion-label>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-item>
-
-        <!--<ion-item-divider class="divider-background-color">
+    <!--<ion-item-divider class="divider-background-color">
             <ion-label style="font-weight: bold; color: white !important;">
                 File Loop
             </ion-label>
@@ -305,6 +425,5 @@
                 </ion-row>
             </ion-grid>
         </ion-item>-->
-
-    </ion-list>
+  </ion-list>
 </ion-content>
