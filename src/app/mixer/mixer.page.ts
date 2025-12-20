@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { SynthService } from "../synth.service";
+import { ModalController } from "@ionic/angular";
+import { StartupModalComponent } from "../startup-modal/startup-modal.component";
 
 @Component({
   selector: "app-mixer",
@@ -25,12 +27,30 @@ export class MixerPage {
   autofilterSpeed: any = this.synth.autofilter.frequency.value;
   phaserSpeed: any = this.synth.phaser.frequency.value;
   chorusSpeed: any = this.synth.chorus.frequency.value;
+  modalShown = false;
 
-  constructor(private synth: SynthService) {
+  constructor(private synth: SynthService, private modalCtrl: ModalController) {
     this.autofilterEnabled = false;
     this.mute(2);
     this.mute(3);
     this.mute(4);
+  }
+
+  async ionViewDidEnter() {
+    if (!this.modalShown) {
+      this.modalShown = true;
+      await this.presentStartupModal();
+    }
+  }
+
+  async presentStartupModal() {
+    const modal = await this.modalCtrl.create({
+      cssClass: "startup-modal",
+      component: StartupModalComponent,
+      backdropDismiss: false, // important for audio
+    });
+
+    await modal.present();
   }
 
   mute(channel) {

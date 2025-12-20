@@ -1,17 +1,19 @@
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MixerPage } from './mixer.page';
+import { IonicModule } from "@ionic/angular";
+import { RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MixerPage } from "./mixer.page";
+import { StartupModalModule } from "../startup-modal/startup-modal.module";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: MixerPage }])
+    StartupModalModule,
+    RouterModule.forChild([{ path: "", component: MixerPage }]),
   ],
-  declarations: [MixerPage]
+  declarations: [MixerPage],
 })
 export class MixerPageModule {}

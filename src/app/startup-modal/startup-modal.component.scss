@@ -1,0 +1,54 @@
+:host {
+  --background: #000;
+  color: #efed1f;
+}
+
+/* Header */
+ion-header {
+  --background: #000;
+  border-bottom: 1px solid #292929;
+}
+
+ion-title {
+  color: #efed1f;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* IMPORTANT: center inside ion-content scroll */
+ion-content::part(scroll) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Image */
+img {
+  width: 300px;
+  max-width: 80%;
+  margin-bottom: 2rem;
+}
+
+/* Text */
+p {
+  color: #bdbdbd;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+/* Button */
+ion-button {
+  --background: #efed1f;
+  --color: #000;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
