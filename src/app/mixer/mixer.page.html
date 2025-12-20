@@ -37,6 +37,7 @@
         </ion-col>
         <ion-col>
           <ion-range
+            [disabled]="synth.osc1.mute"
             [(ngModel)]="osc1Vol"
             (ionChange)="changeVol(1)"
             min="-60"
@@ -68,6 +69,7 @@
         </ion-col>
         <ion-col>
           <ion-range
+            [disabled]="synth.osc2.mute"
             [(ngModel)]="osc2Vol"
             (ionChange)="changeVol(2)"
             min="-60"
@@ -99,6 +101,7 @@
         </ion-col>
         <ion-col>
           <ion-range
+            [disabled]="synth.osc3.mute"
             [(ngModel)]="osc3Vol"
             (ionChange)="changeVol(3)"
             min="-60"
@@ -130,6 +133,7 @@
         </ion-col>
         <ion-col>
           <ion-range
+            [disabled]="synth.noise.mute"
             [(ngModel)]="noiseVol"
             (ionChange)="changeVol(0)"
             min="-60"
