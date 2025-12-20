@@ -36,7 +36,7 @@ export class MixerPage {
     this.mute(4);
   }
 
-  async ionViewDidEnter() {
+  async ionViewWillEnter() {
     if (!this.modalShown) {
       this.modalShown = true;
       await this.presentStartupModal();
