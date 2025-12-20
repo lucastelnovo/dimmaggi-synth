@@ -106,16 +106,17 @@ export class MixerPage {
   changeVol(osc) {
     switch (osc) {
       case 0:
-        this.synth.noise.volume.value = this.noiseVol;
+        if (!this.synth.noise.mute)
+          this.synth.noise.volume.value = this.noiseVol;
         break;
       case 1:
-        this.synth.osc1.volume.value = this.osc1Vol;
+        if (!this.synth.osc1.mute) this.synth.osc1.volume.value = this.osc1Vol;
         break;
       case 2:
-        this.synth.osc2.volume.value = this.osc2Vol;
+        if (!this.synth.osc2.mute) this.synth.osc2.volume.value = this.osc2Vol;
         break;
       case 3:
-        this.synth.osc3.volume.value = this.osc3Vol;
+        if (!this.synth.osc3.mute) this.synth.osc3.volume.value = this.osc3Vol;
         break;
       case 4:
         /*this.synth.player.volume.value = this.playerVol;*/
