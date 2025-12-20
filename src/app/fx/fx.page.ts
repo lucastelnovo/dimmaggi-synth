@@ -73,6 +73,12 @@ export class FxPage {
     this.joystick.onMouseUp(ev);
   }
 
+  get sequencerDelay() {
+    const MIN = 50;
+    const MAX = 3000;
+    return MAX - this.sequencerVelocity + MIN;
+  }
+
   segmentChanged() {
     if (this.fxOrJoy == "joy") {
       let me = this;
@@ -131,7 +137,8 @@ export class FxPage {
     let me = this;
 
     for (let seq of this.stepsArray) {
-      await me.delay(me.sequencerVelocity);
+      console.log("sequencerDelay", me.sequencerDelay);
+      await me.delay(me.sequencerDelay);
       me.playButton(seq, true);
       if (!me.sequencerEnabled) {
         return;

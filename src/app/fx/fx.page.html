@@ -1,13 +1,12 @@
 <ion-header>
-    <ion-toolbar class="header-background-color">
-        <ion-title class="title">FX</ion-title>
-    </ion-toolbar>
+  <ion-toolbar class="header-background-color">
+    <ion-title class="title">FX</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-list lines="none">
-
-        <!--<ion-segment [(ngModel)]="fxOrJoy" (ionChange)="segmentChanged()">
+  <ion-list lines="none">
+    <!--<ion-segment [(ngModel)]="fxOrJoy" (ionChange)="segmentChanged()">
             <ion-segment-button value="key">
                 <ion-label style="font-weight: bold;">Keyboard</ion-label>
             </ion-segment-button>
@@ -16,189 +15,335 @@
             </ion-segment-button>
         </ion-segment>-->
 
+    <div *ngIf="fxOrJoy == 'key'">
+      <ion-item-divider class="divider-background-color">
+        <ion-label> Keyboard trigger </ion-label>
+        <ion-toggle
+          #toggleKey
+          (click)="enableKeyboard()"
+          slot="end"
+          color="primary"
+        ></ion-toggle>
+      </ion-item-divider>
+      <ion-item-divider class="divider-background-color">
+        <ion-label> Sequencer </ion-label>
+        <ion-toggle
+          #toggleSeq
+          (click)="enableSequencer()"
+          slot="end"
+          color="primary"
+        ></ion-toggle>
+      </ion-item-divider>
 
-        <div *ngIf="fxOrJoy == 'key'">
-            <ion-item-divider class="divider-background-color">
-                <ion-label>
-                    Keyboard trigger
+      <ion-item>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col align-self-center size="4">
+              <ion-label style="color: #a2a2a2 !important; font-size: small">
+                Steps:
+                <span style="color: #efed1f !important; font-weight: bold"
+                  >{{steps}}</span
+                >
+              </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-range
+                snaps="true"
+                [(ngModel)]="steps"
+                (ionChange)="changeSeqSteps()"
+                step="1"
+                min="1"
+                max="16"
+              >
+                <ion-label slot="start">1</ion-label>
+                <ion-label slot="end">16</ion-label>
+              </ion-range>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center>
+            <ion-col align-self-center size="3">
+              <ion-label style="color: #a2a2a2 !important; font-size: small">
+                Note Duration
+              </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-range
+                [(ngModel)]="noteDuration"
+                step="10"
+                min="50"
+                max="3000"
+              >
+                <ion-label slot="start">min</ion-label>
+                <ion-label slot="end">max</ion-label>
+              </ion-range>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center *ngIf="sequencerEnabled">
+            <ion-col align-self-center size="3">
+              <ion-label style="color: #a2a2a2 !important; font-size: small">
+                Speed
+              </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-range
+                [(ngModel)]="sequencerVelocity"
+                step="10"
+                min="50"
+                max="3000"
+              >
+                <ion-label slot="start">min</ion-label>
+                <ion-label slot="end">max</ion-label>
+              </ion-range>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center *ngIf="sequencerEnabled">
+            <ion-col>
+              <ion-item>
+                <ion-label style="color: #a2a2a2 !important; font-size: small">
+                  Reverse
                 </ion-label>
-                <ion-toggle #toggleKey (click)="enableKeyboard()" slot="end" color="primary"></ion-toggle>
-            </ion-item-divider>
-            <ion-item-divider class="divider-background-color">
-                <ion-label>
-                    Sequencer
+                <ion-toggle
+                  (click)="reverseSequence()"
+                  slot="end"
+                  color="primary"
+                ></ion-toggle>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label style="color: #a2a2a2 !important; font-size: small">
+                  Random
                 </ion-label>
-                <ion-toggle #toggleSeq (click)="enableSequencer()" slot="end" color="primary"></ion-toggle>
-            </ion-item-divider>
+                <ion-toggle
+                  (click)="randomSequence()"
+                  slot="end"
+                  color="primary"
+                ></ion-toggle>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
 
+      <ion-grid fixed="true">
+        <ion-row justify-content-center>
+          <ion-col
+            #key1
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(1)"
+          >
+            <ion-icon class="pad" name="key"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 1"
+            #key2
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(2)"
+          >
+            <ion-icon class="pad" name="bonfire"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 2"
+            #key3
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(3)"
+          >
+            <ion-icon class="pad" name="beer"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 3"
+            #key4
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(4)"
+          >
+            <ion-icon class="pad" name="jet"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col
+            *ngIf="steps > 4"
+            #key5
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(5)"
+          >
+            <ion-icon class="pad" name="finger-print"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 5"
+            #key6
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(6)"
+          >
+            <ion-icon class="pad" name="flash"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 6"
+            #key7
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(7)"
+          >
+            <ion-icon class="pad" name="globe"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 7"
+            #key8
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(8)"
+          >
+            <ion-icon class="pad" name="heart"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col
+            *ngIf="steps > 8"
+            #key9
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(9)"
+          >
+            <ion-icon class="pad" name="magnet"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 9"
+            #key10
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(10)"
+          >
+            <ion-icon class="pad" name="moon"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 10"
+            #key11
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(11)"
+          >
+            <ion-icon class="pad" name="paw"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 11"
+            #key12
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(12)"
+          >
+            <ion-icon class="pad" name="radio"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col
+            *ngIf="steps > 12"
+            #key13
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(13)"
+          >
+            <ion-icon class="pad" name="rose"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 13"
+            #key14
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(14)"
+          >
+            <ion-icon class="pad" name="sunny"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 14"
+            #key15
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(15)"
+          >
+            <ion-icon class="pad" name="hand"></ion-icon>
+          </ion-col>
+          <ion-col
+            *ngIf="steps > 15"
+            #key16
+            class="col-keyboard"
+            align-self-center
+            (click)="playButton(16)"
+          >
+            <ion-icon class="pad" name="time"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngIf="fxOrJoy == 'joy'">
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col>
             <ion-item>
-                <ion-grid>
-                    <ion-row justify-content-center>
-                        <ion-col align-self-center size="4">
-                            <ion-label style="color: #a2a2a2 !important; font-size: small">
-                                Steps: <span style="color: #efed1f !important; font-weight: bold">{{steps}}</span>
-                            </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-range snaps="true" [(ngModel)]="steps" (ionChange)="changeSeqSteps()"
-                                       step="1"
-                                       min="1"
-                                       max="16">
-                                <ion-label slot="start">1</ion-label>
-                                <ion-label slot="end">16</ion-label>
-                            </ion-range>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row justify-content-center>
-                        <ion-col align-self-center size="3">
-                            <ion-label style="color: #a2a2a2 !important; font-size: small">
-                                Duration
-                            </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-range [(ngModel)]="noteDuration" step="10"
-                                       min="50"
-                                       max="3000">
-                                <ion-label slot="start">min</ion-label>
-                                <ion-label slot="end">max</ion-label>
-                            </ion-range>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row justify-content-center *ngIf="sequencerEnabled">
-                        <ion-col align-self-center size="3">
-                            <ion-label style="color: #a2a2a2 !important; font-size: small">
-                                Velocity
-                            </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-range [(ngModel)]="sequencerVelocity" step="10"
-                                       min="50"
-                                       max="3000">
-                                <ion-label slot="start">max</ion-label>
-                                <ion-label slot="end">min</ion-label>
-                            </ion-range>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row justify-content-center *ngIf="sequencerEnabled">
-                        <ion-col>
-                            <ion-item>
-                                <ion-label style="color: #a2a2a2 !important; font-size: small">
-                                    Reverse
-                                </ion-label>
-                                <ion-toggle (click)="reverseSequence()" slot="end"
-                                            color="primary"></ion-toggle>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col>
-                            <ion-item>
-                                <ion-label style="color: #a2a2a2 !important; font-size: small">
-                                    Random
-                                </ion-label>
-                                <ion-toggle (click)="randomSequence()" slot="end"
-                                            color="primary"></ion-toggle>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+              <ion-label style="font-size: small; color: #a2a2a2 !important"
+                >X axis</ion-label
+              >
+              <ion-select
+                style="min-width: 70%"
+                [(ngModel)]="xDestination"
+                (ionChange)="changeAxisDestination('x')"
+              >
+                <ion-select-option value="none">None</ion-select-option>
+                <ion-select-option value="lfo1Freq"
+                  >LFO 1 Frequency</ion-select-option
+                >
+                <ion-select-option value="lfo2Freq"
+                  >LFO 2 Frequency</ion-select-option
+                >
+                <ion-select-option value="masterFilter"
+                  >Master Filter</ion-select-option
+                >
+              </ion-select>
             </ion-item>
-
-
-            <ion-grid fixed="true">
-                <ion-row justify-content-center>
-                    <ion-col #key1 class="col-keyboard" align-self-center (click)="playButton(1)">
-                        <ion-icon class="pad" name="key"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 1" #key2 class="col-keyboard" align-self-center (click)="playButton(2)">
-                        <ion-icon class="pad" name="bonfire"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 2" #key3 class="col-keyboard" align-self-center (click)="playButton(3)">
-                        <ion-icon class="pad" name="beer"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 3" #key4 class="col-keyboard" align-self-center (click)="playButton(4)">
-                        <ion-icon class="pad" name="jet"></ion-icon>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col *ngIf="steps > 4" #key5 class="col-keyboard" align-self-center (click)="playButton(5)">
-                        <ion-icon class="pad" name="finger-print"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 5" #key6 class="col-keyboard" align-self-center (click)="playButton(6)">
-                        <ion-icon class="pad" name="flash"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 6" #key7 class="col-keyboard" align-self-center (click)="playButton(7)">
-                        <ion-icon class="pad" name="globe"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 7" #key8 class="col-keyboard" align-self-center (click)="playButton(8)">
-                        <ion-icon class="pad" name="heart"></ion-icon>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col *ngIf="steps > 8" #key9 class="col-keyboard" align-self-center (click)="playButton(9)">
-                        <ion-icon class="pad" name="magnet"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 9" #key10 class="col-keyboard" align-self-center (click)="playButton(10)">
-                        <ion-icon class="pad" name="moon"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 10" #key11 class="col-keyboard" align-self-center (click)="playButton(11)">
-                        <ion-icon class="pad" name="paw"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 11" #key12 class="col-keyboard" align-self-center (click)="playButton(12)">
-                        <ion-icon class="pad" name="radio"></ion-icon>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col *ngIf="steps > 12" #key13 class="col-keyboard" align-self-center (click)="playButton(13)">
-                        <ion-icon class="pad" name="rose"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 13" #key14 class="col-keyboard" align-self-center (click)="playButton(14)">
-                        <ion-icon class="pad" name="sunny"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 14" #key15 class="col-keyboard" align-self-center (click)="playButton(15)">
-                        <ion-icon class="pad" name="hand"></ion-icon>
-                    </ion-col>
-                    <ion-col *ngIf="steps > 15" #key16 class="col-keyboard" align-self-center (click)="playButton(16)">
-                        <ion-icon class="pad" name="time"></ion-icon>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-
-        <div *ngIf="fxOrJoy == 'joy'">
-            <ion-grid>
-                <ion-row justify-content-center>
-                    <ion-col>
-                        <ion-item>
-                            <ion-label style="font-size: small; color: #a2a2a2 !important;">X axis</ion-label>
-                            <ion-select style="min-width: 70%;" [(ngModel)]="xDestination" (ionChange)="changeAxisDestination('x')">
-                                <ion-select-option value="none">None</ion-select-option>
-                                <ion-select-option value="lfo1Freq">LFO 1 Frequency</ion-select-option>
-                                <ion-select-option value="lfo2Freq">LFO 2 Frequency</ion-select-option>
-                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-                <ion-row justify-content-center>
-                    <ion-col>
-                        <ion-item>
-                            <ion-label style="font-size: small; color: #a2a2a2 !important;">Y axis</ion-label>
-                            <ion-select style="min-width: 70%;" [(ngModel)]="yDestination" (ionChange)="changeAxisDestination('y')">
-                                <ion-select-option value="none">None</ion-select-option>
-                                <ion-select-option value="lfo1Freq">LFO 1 Frequency</ion-select-option>
-                                <ion-select-option value="lfo2Freq">LFO 2 Frequency</ion-select-option>
-                                <ion-select-option value="masterFilter">Master Filter</ion-select-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-            <div id="joyDiv" style="width:200px;height:200px;margin-bottom:20px;">
-                <canvas id="joystick" (mousedown)="mouseDown($event)" (mousemove)="mouseMove($event)"
-                        (mouseup)="mouseUp($event)" (press)="touchStart($event)" (pressup)="touchEnd($event)">
-                </canvas>
-            </div>
-        </div>
-
-    </ion-list>
-
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+          <ion-col>
+            <ion-item>
+              <ion-label style="font-size: small; color: #a2a2a2 !important"
+                >Y axis</ion-label
+              >
+              <ion-select
+                style="min-width: 70%"
+                [(ngModel)]="yDestination"
+                (ionChange)="changeAxisDestination('y')"
+              >
+                <ion-select-option value="none">None</ion-select-option>
+                <ion-select-option value="lfo1Freq"
+                  >LFO 1 Frequency</ion-select-option
+                >
+                <ion-select-option value="lfo2Freq"
+                  >LFO 2 Frequency</ion-select-option
+                >
+                <ion-select-option value="masterFilter"
+                  >Master Filter</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div id="joyDiv" style="width: 200px; height: 200px; margin-bottom: 20px">
+        <canvas
+          id="joystick"
+          (mousedown)="mouseDown($event)"
+          (mousemove)="mouseMove($event)"
+          (mouseup)="mouseUp($event)"
+          (press)="touchStart($event)"
+          (pressup)="touchEnd($event)"
+        >
+        </canvas>
+      </div>
+    </div>
+  </ion-list>
 </ion-content>
